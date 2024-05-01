@@ -1,0 +1,96 @@
+version: "3.8"
+
+services:
+  frontend1:
+    image: josesotosa/autofix-frontend:latest
+    networks:
+      - frontend-network
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  frontend2:
+    image: josesotosa/autofix-frontend:latest
+    networks:
+      - frontend-network
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  frontend3:
+    image: josesotosa/autofix-frontend:latest
+    networks:
+      - frontend-network
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  backend1:
+    image: josesotosa/autofix-backend:latest
+    environment:
+      - DB_HOST:192.168.56.1
+    networks:
+      - backend-network
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  backend2:
+    image: josesotosa/autofix-backend:latest
+    environment:
+      - DB_HOST=192.168.56.1
+    networks:
+      - backend-network
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  backend3:
+    image: josesotosa/autofix-backend:latest
+    environment:
+      - DB_HOST:192.168.56.1
+    networks:
+      - backend-network
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - DATABASE_HOST=192.168.56.1
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=autofix
+
+  nginx-frontend:
+    image: nginx:latest
+    ports:
+      - "8070:80"
+    volumes:
+      - ./nginx-frontend.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - frontend1
+      - frontend2
+      - frontend3
+    networks:
+      - frontend-network
+
+  nginx-backend:
+    image: nginx:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./nginx-backend.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend1
+      - backend2
+      - backend3
+    networks:
+      - backend-network
+
+networks:
+  frontend-network:
+  backend-network:
