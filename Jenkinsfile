@@ -13,7 +13,7 @@ pipeline {
          stage('Build frontend') {
             steps {
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/JoseSotoSanchez/FrontEnd']])
-                bat 'cd C:\Users\Jose Soto Sanchez\OneDrive\Documentos\Mingeso 1-2024\EvaluacionUno\FrontEnd'
+                bat 'cd C:\\Users\\Jose Soto Sanchez\\OneDrive\\Documentos\\Mingeso 1-2024\\EvaluacionUno\\FrontEnd'
                 bat 'npm run build'
             }
          }
