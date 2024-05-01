@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    tools{
-        maven 'maven_4_0_0'
-    }
+     tools{
+            maven 'maven_3_8_1'
+        }
     stages{
         stage('Build backend'){
             steps{
@@ -20,6 +20,9 @@ pipeline {
          }
 
         stage('Unit Tests') {
+            steps {
+                // Aquí van los pasos para ejecutar las pruebas unitarias
+            }
         }
 
         stage('Build backend docker image'){
