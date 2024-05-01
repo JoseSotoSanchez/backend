@@ -1,9 +1,12 @@
 pipeline {
     agent any
+    tools{
+        maven 'maven_3_8_1'
+    }
+
     stages{
         stage('Build backend'){
             steps{
-                tool 'maven'
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/JoseSotoSanchez/backend']])
                 bat 'mvn clean package'
             }
