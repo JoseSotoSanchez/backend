@@ -16,12 +16,6 @@ pipeline {
             }
          }
 
-        stage('Unit Tests') {
-            steps {
-                // Aquí van los pasos para ejecutar las pruebas unitarias
-            }
-        }
-
         stage('Build backend docker image'){
             steps{
                 script{
