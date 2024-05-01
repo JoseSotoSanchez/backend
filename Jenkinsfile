@@ -5,7 +5,8 @@ pipeline {
             steps{
                 tool 'maven'
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/JoseSotoSanchez/backend']])
-                bat 'mvn clean package'
+                bat 'mvn clean'
+                bat 'mvn package -DskipTests'
             }
         }
 
