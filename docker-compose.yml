@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  frontend:
+    container_name: autofix_frontend
+    image: josesotosa/autofix-frontend:latest
+    ports:
+      - "8070:80"
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  backend:
+    container_name: autofix_backend
+    image: josesotosa/autofix-backend:latest
+    environment:
+      - DB_HOST=192.168.56.1
+    ports:
+      - "3000:3000"
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - DATABASE_HOST=192.168.56.1
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=autofix
