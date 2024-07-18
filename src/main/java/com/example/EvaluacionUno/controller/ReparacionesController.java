@@ -1,7 +1,7 @@
 package com.example.EvaluacionUno.controller;
 
 import com.example.EvaluacionUno.DTO.ReparacionDTO;
-import com.example.EvaluacionUno.DTO.ReparacionesDTO;
+import com.example.EvaluacionUno.rDTO.ReparacionesDTO;
 import com.example.EvaluacionUno.entity.ReparacionesEntity;
 import com.example.EvaluacionUno.service.ReparacionesService;
 import org.springframework.beans.factory.annotation.Autowired;

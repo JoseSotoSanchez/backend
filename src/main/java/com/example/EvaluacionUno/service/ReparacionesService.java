@@ -1,9 +1,8 @@
 package com.example.EvaluacionUno.service;
 
 import com.example.EvaluacionUno.DTO.ReparacionDTO;
-import com.example.EvaluacionUno.DTO.ReparacionesDTO;
+import com.example.EvaluacionUno.rDTO.ReparacionesDTO;
 import com.example.EvaluacionUno.entity.DescuentosRecargosEntity;
-import com.example.EvaluacionUno.entity.ReparacionEntity;
 import com.example.EvaluacionUno.entity.ReparacionesEntity;
 import com.example.EvaluacionUno.entity.VehiculoEntity;
 import com.example.EvaluacionUno.repository.DescuentosRecargosRepository;
