@@ -24,6 +24,12 @@ public class VehiculoController {
     public List<VehiculoEntity> obtenerVehiculos() {
         return this.vehiculoService.obtenerVehiculos();
     }
+
+    @GetMapping("nopagados")
+    public List<VehiculoEntity> obtenerVehiculosNoPagados() {
+        return this.vehiculoService.obtenerVehiculosNoPagados();
+    }
+
     @GetMapping("id/{id}")
     public Optional<VehiculoEntity> getVehiculobyId(@PathVariable int id) {
         return this.vehiculoService.getVehiculobyId(id);
@@ -38,5 +44,10 @@ public class VehiculoController {
     public ResponseEntity<Boolean> deleteVehiculo(@PathVariable int id) throws Exception {
         var isDeleted = vehiculoService.deleteVehiculo(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("guardatotal/{id}/{total}")
+    public Optional<VehiculoEntity> guardarTotal(@PathVariable int id, @PathVariable int total) {
+        return Optional.ofNullable(this.vehiculoService.guardarTotal(id, total));
     }
 }

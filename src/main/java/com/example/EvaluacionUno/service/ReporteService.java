@@ -3,6 +3,7 @@ package com.example.EvaluacionUno.service;
 import com.example.EvaluacionUno.entity.*;
 import com.example.EvaluacionUno.repository.DescuentosRecargosRepository;
 import com.example.EvaluacionUno.repository.ReparacionRepository;
+import com.example.EvaluacionUno.repository.ReparacionesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,16 +18,19 @@ public class ReporteService {
     private final DescuentosRecargosRepository desuentosRecargosRepository;
     private final ReparacionService reparacionService;
     private final ReparacionesService reparacionesService;
+    private final ReparacionesRepository reparacionesRepository;
     private final VehiculoService vehiculoService;
 
     @Autowired
     public ReporteService(DescuentosRecargosRepository desuentosRecargosRepository,
                           ReparacionService reparacionService,
                           ReparacionesService reparacionesService,
-                          VehiculoService vehiculoService) {
+                          VehiculoService vehiculoService,
+                          ReparacionesRepository reparacionesRepository) {
         this.desuentosRecargosRepository = desuentosRecargosRepository;
         this.reparacionService = reparacionService;
         this.reparacionesService = reparacionesService;
+        this.reparacionesRepository = reparacionesRepository;
         this.vehiculoService = vehiculoService;
     }
 
@@ -49,7 +53,7 @@ public class ReporteService {
             lista.add(reptip);
         }
 
-        var reparacionesall = reparacionesService.obtenerReparaciones();
+        var reparacionesall = reparacionesRepository.findAll();
         for (ReparacionesEntity reparacion1 : reparacionesall){
             Optional<VehiculoEntity> vehiculo = vehiculoService.getVehiculobyId(reparacion1.getId_vehiculo());
             if(vehiculo.isPresent()){
@@ -71,7 +75,7 @@ public class ReporteService {
                         if(veh.getTipo().equals("Hatchback")){
                             rep.setTipo_hatchback(rep.getTipo_hatchback()+1);
                         }
-                        rep.setTotal(rep.getTotal() + reparacion1.getMonto_total());
+                        rep.setTotal(rep.getTotal() + veh.getTotalReparaciones());
                     }
                 }
             }
@@ -81,7 +85,7 @@ public class ReporteService {
 
     public List<TiempoPromedioEntity> tiempoPromedio(){
         List<TiempoPromedioEntity> lista = new ArrayList<>();
-        var reparaciones = reparacionesService.obtenerReparaciones();
+        var reparaciones = reparacionesRepository.findAll();
         for(ReparacionesEntity reparacion : reparaciones){
             Optional<VehiculoEntity> vehiculo = vehiculoService.getVehiculobyId(reparacion.getId_vehiculo());
             if(vehiculo.isPresent()) {
@@ -131,7 +135,7 @@ public class ReporteService {
             lista.add(reptip);
         }
 
-        var reparacionesall = reparacionesService.obtenerReparaciones();
+        var reparacionesall = reparacionesRepository.findAll();
         for (ReparacionesEntity reparacion1 : reparacionesall){
             Optional<VehiculoEntity> vehiculo = vehiculoService.getVehiculobyId(reparacion1.getId_vehiculo());
             if(vehiculo.isPresent()){

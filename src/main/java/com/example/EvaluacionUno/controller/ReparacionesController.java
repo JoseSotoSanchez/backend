@@ -1,5 +1,7 @@
 package com.example.EvaluacionUno.controller;
 
+import com.example.EvaluacionUno.DTO.ReparacionDTO;
+import com.example.EvaluacionUno.DTO.ReparacionesDTO;
 import com.example.EvaluacionUno.entity.ReparacionesEntity;
 import com.example.EvaluacionUno.service.ReparacionesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +34,23 @@ public class ReparacionesController {
     }
 
     @GetMapping
-    public List<ReparacionesEntity> obtenerReparaciones() {
+    public List<ReparacionDTO> obtenerReparaciones() {
         return this.reparacionesService.obtenerReparaciones();
     }
 
-    @PutMapping("pagar")
-    public ReparacionesEntity pagar(@RequestBody ReparacionesEntity reparacion) {
-        return this.reparacionesService.pagarReparacion(reparacion);
+    @GetMapping("ultimas")
+    public List<ReparacionesDTO> obtenerUltimasReparaciones() {
+        return this.reparacionesService.obtenerUltimasReparaciones();
+    }
+
+    @PutMapping
+    public ReparacionesEntity actualizar(@RequestBody ReparacionesEntity reparacion) {
+        return this.reparacionesService.actualizarReparacion(reparacion);
+    }
+
+    @PutMapping("pagar/{id}")
+    public ReparacionesEntity pagar(@PathVariable int id) {
+        return this.reparacionesService.pagarReparacion(id);
     }
 
     @DeleteMapping("id/{id}")

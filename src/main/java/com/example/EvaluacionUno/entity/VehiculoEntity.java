@@ -22,6 +22,7 @@ public class VehiculoEntity {
     private String tipo_motor;
     private int numero_asientos;
     private int kilometraje;
+    private int totalReparaciones;
 
     // Getters y setters
 
@@ -95,6 +96,14 @@ public class VehiculoEntity {
 
     public void setKilometraje(int kilometraje) {
         this.kilometraje = kilometraje;
+    }
+
+    public int getTotalReparaciones() {
+        return totalReparaciones;
+    }
+
+    public void setTotalReparaciones(int totalReparaciones) {
+        this.totalReparaciones = totalReparaciones;
     }
 
     @Override

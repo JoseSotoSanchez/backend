@@ -1,5 +1,7 @@
 package com.example.EvaluacionUno.service;
 
+import com.example.EvaluacionUno.DTO.ReparacionDTO;
+import com.example.EvaluacionUno.DTO.ReparacionesDTO;
 import com.example.EvaluacionUno.entity.DescuentosRecargosEntity;
 import com.example.EvaluacionUno.entity.ReparacionEntity;
 import com.example.EvaluacionUno.entity.ReparacionesEntity;
@@ -36,16 +38,76 @@ public class ReparacionesService {
         return reparacionesRepository.save(reparacion);
     }
 
-    public List<ReparacionesEntity> obtenerReparaciones(){
-        return reparacionesRepository.findAll();
+    public List<ReparacionDTO> obtenerReparaciones(){
+        List<ReparacionDTO> reparacionDTOs = new ArrayList<>();
+        List<ReparacionesEntity> reparacionesEntities = reparacionesRepository.findAll();
+        List<VehiculoEntity> vehiculosEntities = vehiculoRepository.findAll();
+        for (ReparacionesEntity reparacion : reparacionesEntities){
+            for (VehiculoEntity vehiculo : vehiculosEntities){
+                if(reparacion.getId_vehiculo() == vehiculo.getId_vehiculo()){
+                    ReparacionDTO reparacionDTO = new ReparacionDTO();
+                    reparacionDTO.setId(vehiculo.getId_vehiculo());
+                    reparacionDTO.setPatente(vehiculo.getPatente());
+                    reparacionDTO.setTipo_reparacion(reparacion.getTipo_reparacion());
+                    reparacionDTO.setFecha_ingreso(reparacion.getFecha_ingreso());
+                    reparacionDTO.setFecha_salida(reparacion.getFecha_salida());
+                    reparacionDTO.setFecha_entrega_cliente(reparacion.getFecha_entrega_cliente());
+                    reparacionDTO.setId_vehiculo(vehiculo.getId_vehiculo());
+                    reparacionDTO.setPagada(reparacion.isPagada());
+                    reparacionDTO.setMonto_total(reparacion.getMonto_total());
+                    reparacionDTOs.add(reparacionDTO);
+                }
+            }
+        }
+        return reparacionDTOs;
+    }
+
+    public List<ReparacionesDTO> obtenerUltimasReparaciones(){
+        List<ReparacionesDTO> reparacionesDTOs = new ArrayList<>();
+        List<ReparacionesEntity> reparacionesEntities = reparacionesRepository.findAll();
+        List<VehiculoEntity> vehiculosEntities = vehiculoRepository.findAll();
+        for (ReparacionesEntity reparacion : reparacionesEntities){
+            for (VehiculoEntity vehiculo : vehiculosEntities){
+                if(reparacion.getId_vehiculo() == vehiculo.getId_vehiculo()){
+                    ReparacionesDTO reparacionDTO = new ReparacionesDTO();
+                    reparacionDTO.setId(vehiculo.getId_vehiculo());
+                    reparacionDTO.setPatente(vehiculo.getPatente());
+                    reparacionDTO.setMarca(vehiculo.getMarca());
+                    reparacionDTO.setModelo(vehiculo.getModelo());
+                    reparacionDTO.setAnio(vehiculo.getAnio_fabricacion());
+                    reparacionDTO.setReparacion(reparacion.getTipo_reparacion());
+                    reparacionDTO.setFecha_reparacion(reparacion.getFecha_salida());
+                    reparacionesDTOs.add(reparacionDTO);
+                }
+            }
+        }
+        Collections.sort(reparacionesDTOs, new Comparator<ReparacionesDTO>() {
+            @Override
+            public int compare(ReparacionesDTO o1, ReparacionesDTO o2) {
+                return Long.compare(o2.getId(), o1.getId()); // De mayor a menor
+            }
+        });
+        List<ReparacionesDTO> limitedList = reparacionesDTOs.subList(0, Math.min(reparacionesDTOs.size(), 10));
+        return limitedList;
     }
 
     public Optional<ReparacionesEntity> obtenerReparacion(int id){
         return reparacionesRepository.findById((long)id);
     }
 
-    public ReparacionesEntity pagarReparacion(ReparacionesEntity reparacion){
-        reparacion.setPagada(true);
+    public ReparacionesEntity pagarReparacion(int id){
+        ReparacionesEntity rep = new ReparacionesEntity();
+        List<ReparacionesEntity> reparaciones = reparacionesRepository.findAll();
+        for(ReparacionesEntity reparacion : reparaciones){
+            if(reparacion.getId_vehiculo() == id){
+                rep = reparacion;
+            }
+        }
+        rep.setPagada(true);
+        return reparacionesRepository.save(rep);
+    }
+
+    public ReparacionesEntity actualizarReparacion(ReparacionesEntity reparacion){
         return reparacionesRepository.save(reparacion);
     }
 
@@ -85,7 +147,7 @@ public class ReparacionesService {
                 DescuentosRecargosEntity descuentosRecargos = new DescuentosRecargosEntity();
                 descuentosRecargos.setPatente(veh.getPatente());
                 descuentosRecargos.setId_vehiculo(veh.getId_vehiculo().intValue());
-                descuentosRecargos.setTipo("Valor total reparación");
+                descuentosRecargos.setTipo("Valor total reparación "+ rpr.getTipo_reparacion());
                 descuentosRecargos.setValor(rpr.getMonto_total());
                 descuentosRecargosRepository.save(descuentosRecargos);
                 Date fechaActual = new Date();
