@@ -73,7 +73,7 @@ public class ReparacionDTO {
         return fechaEntregaCliente;
     }
 
-    public void setFechaEntregaCliente(Date fechaEntregaEliente) {
+    public void setFechaEntregaCliente(Date fechaEntregaCliente) {
         this.fechaEntregaCliente = fechaEntregaCliente;
     }
 
@@ -85,3 +85,4 @@ public class ReparacionDTO {
         this.pagada = pagada;
     }
 }
+
