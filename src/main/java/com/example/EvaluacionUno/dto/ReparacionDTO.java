@@ -13,6 +13,8 @@ public class ReparacionDTO {
     private Date fechaEntregaCliente;
     private boolean pagada;
 
+
+
     public Long getId() {
         return id;
     }
