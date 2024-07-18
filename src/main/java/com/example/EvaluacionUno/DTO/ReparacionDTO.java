@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class ReparacionDTO {
     private Long id;
-    private Long id_vehiculo;
+    private Long idVehiculo;
     private String patente;
-    private Date fecha_ingreso;
-    private String tipo_reparacion;
-    private int monto_total;
-    private Date fecha_salida;
-    private Date fecha_entrega_cliente;
+    private Date fechaIngreso;
+    private String tipoReparacion;
+    private int montoTotal;
+    private Date fechaSalida;
+    private Date fechaEntregaCliente;
     private boolean pagada;
 
     public Long getId() {
@@ -21,12 +21,12 @@ public class ReparacionDTO {
         this.id = id;
     }
 
-    public Long getId_vehiculo() {
-        return id_vehiculo;
+    public Long getIdVehiculo() {
+        return idVehiculo;
     }
 
-    public void setId_vehiculo(Long id_vehiculo) {
-        this.id_vehiculo = id_vehiculo;
+    public void setIdVehiculo(Long idVehiculo) {
+        this.idVehiculo = idVehiculo;
     }
 
     public String getPatente() {
@@ -37,44 +37,44 @@ public class ReparacionDTO {
         this.patente = patente;
     }
 
-    public Date getFecha_ingreso() {
-        return fecha_ingreso;
+    public Date getFechaIngreso() {
+        return fechaIngreso;
     }
 
-    public void setFecha_ingreso(Date fecha_ingreso) {
-        this.fecha_ingreso = fecha_ingreso;
+    public void setFechaIngreso(Date fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
     }
 
-    public String getTipo_reparacion() {
-        return tipo_reparacion;
+    public String getTipoReparacion() {
+        return tipoReparacion;
     }
 
-    public void setTipo_reparacion(String tipo_reparacion) {
-        this.tipo_reparacion = tipo_reparacion;
+    public void setTipoReparacion(String tipoReparacion) {
+        this.tipoReparacion = tipoReparacion;
     }
 
-    public int getMonto_total() {
-        return monto_total;
+    public int getMontoTotal() {
+        return montoTotal;
     }
 
-    public void setMonto_total(int monto_total) {
-        this.monto_total = monto_total;
+    public void setMontoTotal(int montoTotal) {
+        this.montoTotal = montoTotal;
     }
 
-    public Date getFecha_salida() {
-        return fecha_salida;
+    public Date getFechaSalida() {
+        return fechaSalida;
     }
 
-    public void setFecha_salida(Date fecha_salida) {
-        this.fecha_salida = fecha_salida;
+    public void setFechaSalida(Date fechaSalida) {
+        this.fechaSalida = fechaSalida;
     }
 
-    public Date getFecha_entrega_cliente() {
-        return fecha_entrega_cliente;
+    public Date getFechaEntregaCliente() {
+        return fechaEntregaCliente;
     }
 
-    public void setFecha_entrega_cliente(Date fecha_entrega_cliente) {
-        this.fecha_entrega_cliente = fecha_entrega_cliente;
+    public void setFechaEntregaCliente(Date fechaEntregaEliente) {
+        this.fechaEntregaCliente = fechaEntregaCliente;
     }
 
     public boolean isPagada() {

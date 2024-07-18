@@ -1,10 +1,5 @@
 package com.example.EvaluacionUno.DTO;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.util.Date;
 
 public class ReparacionesDTO {
@@ -14,7 +9,7 @@ public class ReparacionesDTO {
     private String modelo;
     private int anio;
     private String reparacion;
-    private Date fecha_reparacion;
+    private Date fechaReparacion;
 
     public Long getId() {
         return id;
@@ -64,11 +59,11 @@ public class ReparacionesDTO {
         this.reparacion = reparacion;
     }
 
-    public Date getFecha_reparacion() {
-        return fecha_reparacion;
+    public Date getFechaReparacion() {
+        return fechaReparacion;
     }
 
-    public void setFecha_reparacion(Date fecha_reparacion) {
-        this.fecha_reparacion = fecha_reparacion;
+    public void setFechaReparacion(Date fechaReparacion) {
+        this.fechaReparacion = fechaReparacion;
     }
 }

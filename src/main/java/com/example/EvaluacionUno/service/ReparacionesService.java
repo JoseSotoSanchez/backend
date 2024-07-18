@@ -48,13 +48,13 @@ public class ReparacionesService {
                     ReparacionDTO reparacionDTO = new ReparacionDTO();
                     reparacionDTO.setId(vehiculo.getId_vehiculo());
                     reparacionDTO.setPatente(vehiculo.getPatente());
-                    reparacionDTO.setTipo_reparacion(reparacion.getTipo_reparacion());
-                    reparacionDTO.setFecha_ingreso(reparacion.getFecha_ingreso());
-                    reparacionDTO.setFecha_salida(reparacion.getFecha_salida());
-                    reparacionDTO.setFecha_entrega_cliente(reparacion.getFecha_entrega_cliente());
-                    reparacionDTO.setId_vehiculo(vehiculo.getId_vehiculo());
+                    reparacionDTO.setTipoReparacion(reparacion.getTipo_reparacion());
+                    reparacionDTO.setFechaIngreso(reparacion.getFecha_ingreso());
+                    reparacionDTO.setFechaSalida(reparacion.getFecha_salida());
+                    reparacionDTO.setFechaEntregaCliente(reparacion.getFecha_entrega_cliente());
+                    reparacionDTO.setIdVehiculo(vehiculo.getId_vehiculo());
                     reparacionDTO.setPagada(reparacion.isPagada());
-                    reparacionDTO.setMonto_total(reparacion.getMonto_total());
+                    reparacionDTO.setMontoTotal(reparacion.getMonto_total());
                     reparacionDTOs.add(reparacionDTO);
                 }
             }
@@ -76,7 +76,7 @@ public class ReparacionesService {
                     reparacionDTO.setModelo(vehiculo.getModelo());
                     reparacionDTO.setAnio(vehiculo.getAnio_fabricacion());
                     reparacionDTO.setReparacion(reparacion.getTipo_reparacion());
-                    reparacionDTO.setFecha_reparacion(reparacion.getFecha_salida());
+                    reparacionDTO.setFechaReparacion(reparacion.getFecha_salida());
                     reparacionesDTOs.add(reparacionDTO);
                 }
             }
