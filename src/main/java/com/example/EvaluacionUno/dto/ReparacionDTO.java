@@ -1,4 +1,4 @@
-package com.example.EvaluacionUno.DTO;
+package com.example.EvaluacionUno.dto;
 
 import java.util.Date;
 
